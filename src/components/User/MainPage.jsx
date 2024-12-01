@@ -33,7 +33,7 @@ export default function MainPage() {
               name="query"
               required
             />
-            <button type="submit">Search</button>
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
           </fieldset>
         </Form>
       </div>

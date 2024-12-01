@@ -455,6 +455,11 @@ app.post("/freelancer/:fUser/earnings",async(req,res)=>{
   }
 })
 
+app.post("/freelancer/:fUser/profile",async(req,res)=>{
+  const deleteAccount = await collectionF.deleteMany({UserName:req.params.fUser});
+  res.send("success");
+})
+
 app.post("/updatePassword", async (req, res) => {
   const { OldPassword, NewPassword, ReNewPassword } = req.body;
   const token = req.headers["authorization"];

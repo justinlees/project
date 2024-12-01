@@ -22,10 +22,11 @@ import CrequestedTasks, {
   Action as RequestedAction,
 } from "./components/User/CrequestedTasks";
 import CacceptedTasks from "./components/User/CacceptedTasks";
+import CProfile,{Action as CDeleteAction} from "./components/User/CProfile";
 
 /* Freelancer Imports */
 import FreeLance, { Loader as Floader } from "./Layouts/Freelancer/freelancer";
-import FProfile from "./components/Freelancer/FProfile";
+import FProfile,{Action as DeleteAction} from "./components/Freelancer/FProfile";
 import FdashBoard from "./components/Freelancer/fDashBoard";
 import FTasks from "./components/Freelancer/FTasks";
 import FacceptedTasks from "./components/Freelancer/FacceptedTasks";
@@ -53,6 +54,7 @@ import Manager, { Loader as Mloader } from "./Layouts/Manager/manager";
 import ManagerDashBoard from "./components/Manager/ManagerDashBoard";
 import MProfile from "./components/Manager/ManagerProfile";
 import MEarnings from "./components/Manager/MEarnings";
+
 
 const router = createBrowserRouter([
   {
@@ -118,6 +120,11 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path:"profile",
+        element:<CProfile/>,
+        action:CDeleteAction,
+      },
+      {
         path: "settings",
         element: <Settings />,
       },
@@ -135,6 +142,7 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <FProfile />,
+        action:DeleteAction,
       },
       {
         path: "tasks",
