@@ -1,0 +1,267 @@
+.HomePage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  overflow: auto;
+  background-color: whitesmoke;
+}
+
+.HomePage .topNav {
+  width: 100%;
+  height: 3rem;
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  background-color: #ededed;
+}
+
+.HomePage .topNav .left {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.HomePage .topNav .left div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.HomePage .topNav .left div a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.HomePage .topNav .left .activeTasks {
+  background-color: whitesmoke;
+  border-bottom: 4px solid tomato;
+  color: black;
+}
+
+.queryNav {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.queryNav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #555;
+  border-radius: 6px;
+}
+
+.HomePage a {
+  text-decoration: none;
+  color: tomato;
+  margin: 1rem;
+}
+
+.MainPage {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.HomePage .MainPage .searchBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+}
+
+.HomePage .MainPage .searchBar fieldset {
+  width: 60%;
+  display: flex;
+  min-width: 500px;
+  margin: 1rem;
+  border: none;
+}
+
+.HomePage .MainPage .searchBar fieldset input {
+  width: 100%;
+  height:2.5rem;
+  padding: 0.5rem;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border: 1px solid #aaa;
+  color: #555;
+}
+
+.HomePage .MainPage .searchBar fieldset button {
+  width: 5rem;
+  height:2.5rem;
+  background-color: #111;
+  color:#fdfdfd;
+  border: none;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.HomePage .MainPage .freelancersDisplay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  overflow: scroll;
+  margin-bottom: 9rem;
+  background-color: whitesmoke;
+  position: relative;
+}
+
+.HomePage .MainPage .freelancerData {
+  width: 12rem;
+  height: 17rem;
+  padding: 0.5rem;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  -border: 1px solid black;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 2px 2px 6px #555;
+}
+
+.HomePage .MainPage .freelancerData .lancerDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.HomePage .MainPage .freelancerData .lancerDetails img {
+  width: 80px;
+  height: 80px;
+  border: 1px solid black;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.HomePage .MainPage .ClientTasks {
+  display: flex;
+  align-items: center;
+  background-color: #dedede;
+  margin: 2rem 2rem 0rem 17rem;
+}
+
+.top-nav div {
+  width: 8rem;
+  line-height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  transition: all 0.8s;
+}
+
+.top-nav .activeTasks div {
+  background-color: whitesmoke;
+  border-bottom: 4px solid tomato;
+  color: black;
+}
+
+/* top-nav ended */
+
+.HomePage .requestPage {
+  margin: 2rem;
+}
+
+.HomePage .requestPage ul {
+  list-style-type: none;
+}
+
+.HomePage .requestPage form input {
+  display: none;
+}
+
+.HomePage .requestPage form button {
+  width: 6rem;
+  height: 2.5rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #111;
+  color: white;
+  margin: 2rem;
+}
+
+.HomePage .requestPage form .AboutTask {
+  display: block;
+  width: 14rem;
+  height: 4rem;
+  background-color: #ededed;
+  border: none;
+  margin: 1rem;
+}
+
+#TaskName {
+  height: 2rem;
+}
+
+#TaskDescription {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.CmessageDisplay {
+  width: 30rem;
+  height: 20rem;
+  overflow-y: scroll;
+  background-color: rgb(240, 240, 240);
+}
+.CmessageEntry input {
+  border: none;
+  background-color: aliceblue;
+  width: 12rem;
+  height: 2rem;
+  padding: 0.2rem;
+}
+.CmessageEntry button {
+  border: none;
+  width: 4rem;
+  height: 2rem;
+  padding: 0.2rem;
+}
+.CmessageDisplay .clientMsg {
+  width: 10rem;
+  margin: 8px;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: white;
+  color: black;
+  margin-left: auto;
+}
+
+.CmessageDisplay .lancerMsg {
+  width: 10rem;
+  margin: 8px;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: black;
+  color: whitesmoke;
+}
