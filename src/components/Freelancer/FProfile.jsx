@@ -1,18 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import {
-  useOutletContext,
-  Form,
-  redirect,
-  useActionData,
-} from "react-router-dom";
+import { useOutletContext, Form, redirect } from "react-router-dom";
 
 import axios from "axios";
 
 export default function FProfile() {
   const freelancerData = useOutletContext();
   const [showPopUp, setShowPopUp] = React.useState("");
-  const response = useActionData();
 
   return (
     <div className="freelanceDetail freelanceProfile">
@@ -29,17 +22,16 @@ export default function FProfile() {
           <p>Skills: {freelancerData.Skill}</p>
           <p>Email: {freelancerData.email}</p>
           <p>Phone Number: {freelancerData.MobileNo}</p>
-          <p>Account deletion</p>
-          <button
-            type="button"
+          <p
             onClick={() => {
               setShowPopUp(1);
             }}
+            style={{ color: "tomato", cursor: "pointer" }}
           >
-            Delete
-          </button>
+            Account Deletion
+          </p>
           {showPopUp ? (
-            <div className="deletePopUp">
+            <div className="PopUp">
               <Form method="POST">
                 <legend>Confirm Deletion</legend>
                 <input

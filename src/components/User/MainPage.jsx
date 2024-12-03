@@ -33,16 +33,17 @@ export default function MainPage() {
               name="query"
               required
             />
-            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
           </fieldset>
         </Form>
       </div>
 
       <div className="freelancersDisplay">
-      <div className="row">
-        {filteredData.length ? (
-          filteredData?.map((item) => (
-            
+        <div className="row">
+          {filteredData.length ? (
+            filteredData?.map((item) => (
               <div className="freelancerData">
                 <div className="lancerDetails">
                   <div>
@@ -56,15 +57,14 @@ export default function MainPage() {
                   view profile &rarr;
                 </Link>
               </div>
-            
-          ))
-        ) : (
-          <div className="lancerDetails">
-            No details Found
-            <br />
-            Please recheck the entered search key
-          </div>
-        )}
+            ))
+          ) : (
+            <div className="lancerDetails">
+              No details Found
+              <br />
+              Please recheck the entered search key
+            </div>
+          )}
           <div className="freelancerData">
             <div className="lancerDetails">
               <h3>&rarr;</h3>

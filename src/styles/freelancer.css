@@ -330,12 +330,7 @@
 
 /* Pop-UPs styling */
 
-.freelanceDashBoard
-  .mainContent
-  .freelanceProfile
-  .briefDetails
-  .block1
-  .deletePopUp {
+.PopUp {
   width: 100%;
   height: 100%;
   display: flex;
@@ -347,13 +342,7 @@
   position: absolute;
 }
 
-.freelanceDashBoard
-  .mainContent
-  .freelanceProfile
-  .briefDetails
-  .block1
-  .deletePopUp
-  form {
+.PopUp form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -362,34 +351,34 @@
   margin-left: 12rem;
   width: 20rem;
   height: 10rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   border-radius: 8px;
   box-shadow: 1px 1px 4px 1px #111;
 }
 
-.freelanceDashBoard
-  .mainContent
-  .freelanceProfile
-  .briefDetails
-  .block1
-  .deletePopUp
-  form
-  button {
-  width: 5rem;
-  height: 2rem;
-  background-color: tomato;
+.PopUp form button {
+  width: 6rem;
+  line-height: 1.5rem;
+  color: tomato;
+  font-weight: 600;
+  font-size: 1rem;
+  background-color: transparent;
+  margin: 1rem;
+  cursor: pointer;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.PopUp form button:hover {
+  background-color: rgb(255, 224, 219);
+}
+
+.PopUp form .cancel {
+  color: black;
   border: 1px solid black;
 }
 
-.freelanceDashBoard
-  .mainContent
-  .freelanceProfile
-  .briefDetails
-  .block1
-  .deletePopUp
-  form
-  .cancel {
-  width: 5rem;
-  height: 2rem;
-  background-color: transparent;
-  border: 1px solid black;
+.PopUp form .cancel:hover {
+  background-color: rgb(198, 198, 198);
 }

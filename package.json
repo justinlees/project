@@ -15,6 +15,7 @@
     "jwt-decode": "^4.0.0",
     "mongoose": "^8.6.0",
     "nodejs-file-downloader": "^4.13.0",
+    "nodemailer": "^6.9.16",
     "nodemon": "^3.1.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

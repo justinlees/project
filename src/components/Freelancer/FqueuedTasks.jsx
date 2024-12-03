@@ -11,9 +11,13 @@ import axios from "axios";
 export default function FqueuedTasks() {
   const freelancerData = useOutletContext();
   const [requestVal, setRequestVal] = React.useState("");
+  const [acceptFlag, setAcceptFlag] = React.useState("");
+  const [requestFlag, setRequestFlag] = React.useState("");
+  console.log(acceptFlag);
+  console.log(requestVal);
   return (
     <>
-      {freelancerData.bufferRequests ? (
+      {freelancerData.bufferRequests.length ? (
         freelancerData.bufferRequests.map((item) => (
           <div className="requestedClients block1">
             <h3>{item.clientIds}</h3>
@@ -21,7 +25,7 @@ export default function FqueuedTasks() {
               <button type="button" style={{ backgroundColor: "turquoise" }}>
                 <Link to="taskInfo">Info</Link>
               </button>
-              <Form className="clientRequestForm" method="post">
+              {/* <Form className="clientRequestForm" method="post">
                 <input
                   type="text"
                   value={requestVal}
@@ -49,8 +53,8 @@ export default function FqueuedTasks() {
                 <button
                   className="accept"
                   type="submit"
-                  onClick={(e) => {
-                    setRequestVal("accept");
+                  onClick={() => {
+                    setAcceptFlag(1);
                   }}
                 >
                   Accept
@@ -59,13 +63,133 @@ export default function FqueuedTasks() {
                   className="reject"
                   type="submit"
                   onClick={(e) => {
-                    setRequestVal("reject");
+                    setRequestFlag(1);
                   }}
                 >
                   Reject
                 </button>
-              </Form>
+              </Form> */}
+              <button
+                className="accept"
+                type="button"
+                onClick={() => {
+                  setAcceptFlag(1);
+                }}
+              >
+                Accept
+              </button>
+              <button
+                className="reject"
+                type="button"
+                onClick={() => {
+                  setRequestFlag(1);
+                }}
+              >
+                Reject
+              </button>
             </div>
+            {acceptFlag ? (
+              <div className="PopUp">
+                <Form method="POST">
+                  <p>Please pay the platform fee of $2</p>
+                  <input
+                    type="text"
+                    value={requestVal}
+                    name="requestVal"
+                    style={{ display: "none" }}
+                  />
+                  <input
+                    type="text"
+                    name="clientIds"
+                    value={item.clientIds}
+                    style={{ display: "none" }}
+                  />
+                  <input
+                    type="text"
+                    value={item.taskName}
+                    name="taskName"
+                    style={{ display: "none" }}
+                  />
+                  <input
+                    type="text"
+                    name="taskDescription"
+                    value={item.taskDescription}
+                    style={{ display: "none" }}
+                  />
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      setRequestVal("accept");
+                    }}
+                  >
+                    Proceed
+                  </button>
+                  <button
+                    className="cancel"
+                    type="button"
+                    onClick={() => {
+                      setAcceptFlag(0);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </Form>
+              </div>
+            ) : (
+              ""
+            )}
+
+            {requestFlag ? (
+              <div className="PopUp">
+                <Form method="POST">
+                  <p>Do you want to reject the task?</p>
+                  <input
+                    type="text"
+                    value={requestVal}
+                    name="requestVal"
+                    style={{ display: "none" }}
+                  />
+                  <input
+                    type="text"
+                    name="clientIds"
+                    value={item.clientIds}
+                    style={{ display: "none" }}
+                  />
+                  <input
+                    type="text"
+                    value={item.taskName}
+                    name="taskName"
+                    style={{ display: "none" }}
+                  />
+                  <input
+                    type="text"
+                    name="taskDescription"
+                    value={item.taskDescription}
+                    style={{ display: "none" }}
+                  />
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      setRequestVal("reject");
+                    }}
+                  >
+                    Reject
+                  </button>
+                  <button
+                    className="cancel"
+                    type="button"
+                    onClick={() => {
+                      setRequestFlag(0);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </Form>
+              </div>
+            ) : (
+              ""
+            )}
+
             <Outlet context={item} />
           </div>
         ))
