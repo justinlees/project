@@ -1,12 +1,14 @@
 import React from "react";
-import { useOutletContext, Link, Outlet } from "react-router-dom";
+import { useOutletContext, Link, Outlet, Form } from "react-router-dom";
+import axios from "axios";
 
 export default function FacceptedTasks() {
   const freelancerData = useOutletContext();
   const [goBack, setGoBack] = React.useState("");
+  const [Mark, setMark] = React.useState("");
   return (
     <>
-      {freelancerData.tasksAssigned ? (
+      {freelancerData.tasksAssigned.length ? (
         freelancerData.tasksAssigned.map((item) => (
           <div className="acceptedTasks block1">
             <div className="acceptedRequests">
@@ -32,6 +34,45 @@ export default function FacceptedTasks() {
                     Message
                   </Link>
                 </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMark(1);
+                  }}
+                >
+                  Mark Complete
+                </button>
+                {Mark ? (
+                  <div className="PopUp">
+                    <Form method="POST">
+                      <input
+                        text="text"
+                        value={item.clientId}
+                        name="clientId"
+                        style={{ display: "none" }}
+                      />
+                      <input
+                        text="text"
+                        value={item.taskName}
+                        name="taskName"
+                        style={{ display: "none" }}
+                      />
+                      <button type="submit" id="confirmation">
+                        Mark Complete
+                      </button>
+                      <button
+                        id="cancel"
+                        onClick={() => {
+                          setMark(0);
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </Form>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
 
@@ -54,9 +95,20 @@ export default function FacceptedTasks() {
         ))
       ) : (
         <div className="acceptedClients block1">
-          <h1>No Tasks Accepted ....................</h1>
+          <h3>No Tasks Accepted ....................</h3>
         </div>
       )}
     </>
   );
+}
+
+export async function Action({ request, params }) {
+  const formData = Object.fromEntries(await request.formData());
+  const res = await axios.post(
+    `http://localhost:5500/freelancer/${params.fUser}/tasks/acceptedTasks`,
+    formData
+  );
+  if (res) {
+    return "";
+  }
 }

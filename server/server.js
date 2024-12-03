@@ -13,7 +13,6 @@ const collectionMsg = require("../model/messages");
 app.use(express.json());
 app.use(cors());
 
-
 mongoose.connect("mongodb://localhost:27017/JobDone");
 
 // get requests //
@@ -307,7 +306,8 @@ app.post("/home/:userId/:fUser/requestPage", async (req, res) => {
 });
 
 app.post("/freelancer/:fUser/tasks", async (req, res) => {
-  const { clientIds, requestVal, taskName, taskDescription } = req.body;
+  const { clientIds, requestVal, taskName, taskDescription, currAmount } =
+    req.body;
   console.log("entered");
   if (requestVal === "accept") {
     console.log("accepted");
@@ -321,6 +321,7 @@ app.post("/freelancer/:fUser/tasks", async (req, res) => {
             taskDescription: taskDescription,
           },
         },
+        currAmount: parseInt(currAmount) - parseInt(2),
       }
     );
 
@@ -444,21 +445,50 @@ app.post("/home/:userId/tasks/:fUser/messages", async (req, res) => {
   res.send(msgUpdate);
 });
 
-app.post("/freelancer/:fUser/earnings",async(req,res)=>{
-  const findLancer = await collectionF.findOne({UserName:req.params.fUser});
-  if(!findLancer){
+app.post("/freelancer/:fUser/earnings", async (req, res) => {
+  const findLancer = await collectionF.findOne({ UserName: req.params.fUser });
+  if (!findLancer) {
     res.send(null);
-  } else{
+  } else {
     const price = req.body.amount;
-    const lancerUpdate = await collectionF.findOneAndUpdate({UserName:req.params.fUser},{currAmount:(parseInt(findLancer.currAmount)+parseInt(price))});
+    const lancerUpdate = await collectionF.findOneAndUpdate(
+      { UserName: req.params.fUser },
+      { currAmount: parseInt(findLancer.currAmount) + parseInt(price) }
+    );
     res.send(true);
   }
-})
+});
 
-app.post("/freelancer/:fUser/profile",async(req,res)=>{
-  const deleteAccount = await collectionF.deleteMany({UserName:req.params.fUser});
+app.post("/freelancer/:fUser/profile", async (req, res) => {
+  const deleteAccount = await collectionF.deleteMany({
+    UserName: req.params.fUser,
+  });
   res.send("success");
-})
+});
+
+app.post("/freelancer/:fUser/tasks/acceptedTasks", async (req, res) => {
+  console.log("accepted");
+  const taskFinish = await collectionF.findOneAndUpdate(
+    { UserName: req.params.fUser },
+    { $pull: { tasksAssigned: { clientId: req.body.clientId } } }
+  );
+  const addFinishTasks = await collectionF.findOneAndUpdate(
+    { UserName: req.params.fUser },
+    {
+      $push: {
+        finishedTasks: {
+          clientId: req.body.clientId,
+          taskName: req.body.taskName,
+        },
+      },
+    }
+  );
+  const deleteConnection = await collectionMsg.deleteOne({
+    clientId: req.body.clientId,
+    lancerId: req.params.fUser,
+  });
+  res.send("success");
+});
 
 app.post("/updatePassword", async (req, res) => {
   const { OldPassword, NewPassword, ReNewPassword } = req.body;

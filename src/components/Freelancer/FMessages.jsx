@@ -22,8 +22,10 @@ export default function FMessages() {
           {freelancer.tasksAssigned?.map((item) => {
             if (item.clientId === params.userId) {
               return (
-                <div>
-                  <p><b>{item.clientId}</b></p>
+                <div style={{ backgroundColor: "#afafaf" }}>
+                  <p>
+                    <b>{item.clientId}</b>
+                  </p>
                   <p>{item.taskName}</p>
                   <p>{item.taskDescription}</p>
                 </div>

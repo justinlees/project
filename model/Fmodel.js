@@ -19,7 +19,7 @@ const freelancerData = new mongoose.Schema({
     default: 0,
   },
   Skill: String,
-  currAmount: {type:Number,default:0},
+  currAmount: { type: Number, default: 0 },
   amountSpent: Number,
   Transactions: Number,
   bufferRequests: [
@@ -42,7 +42,7 @@ const freelancerData = new mongoose.Schema({
     {
       clientId: { type: String, default: "None" },
       taskName: { type: String, default: "None" },
-    }
+    },
   ],
 });
 

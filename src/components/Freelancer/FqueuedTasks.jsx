@@ -25,50 +25,6 @@ export default function FqueuedTasks() {
               <button type="button" style={{ backgroundColor: "turquoise" }}>
                 <Link to="taskInfo">Info</Link>
               </button>
-              {/* <Form className="clientRequestForm" method="post">
-                <input
-                  type="text"
-                  value={requestVal}
-                  name="requestVal"
-                  style={{ display: "none" }}
-                />
-                <input
-                  type="text"
-                  name="clientIds"
-                  value={item.clientIds}
-                  style={{ display: "none" }}
-                />
-                <input
-                  type="text"
-                  value={item.taskName}
-                  name="taskName"
-                  style={{ display: "none" }}
-                />
-                <input
-                  type="text"
-                  name="taskDescription"
-                  value={item.taskDescription}
-                  style={{ display: "none" }}
-                />
-                <button
-                  className="accept"
-                  type="submit"
-                  onClick={() => {
-                    setAcceptFlag(1);
-                  }}
-                >
-                  Accept
-                </button>
-                <button
-                  className="reject"
-                  type="submit"
-                  onClick={(e) => {
-                    setRequestFlag(1);
-                  }}
-                >
-                  Reject
-                </button>
-              </Form> */}
               <button
                 className="accept"
                 type="button"
@@ -116,8 +72,16 @@ export default function FqueuedTasks() {
                     value={item.taskDescription}
                     style={{ display: "none" }}
                   />
+                  <legend>Current Balance:{freelancerData.currAmount}</legend>
+                  <input
+                    type="Number"
+                    name="currAmount"
+                    value={freelancerData.currAmount}
+                    style={{ display: "none" }}
+                  />
                   <button
                     type="submit"
+                    id="confirmation"
                     onClick={() => {
                       setRequestVal("accept");
                     }}
@@ -125,7 +89,7 @@ export default function FqueuedTasks() {
                     Proceed
                   </button>
                   <button
-                    className="cancel"
+                    id="cancel"
                     type="button"
                     onClick={() => {
                       setAcceptFlag(0);
@@ -169,6 +133,7 @@ export default function FqueuedTasks() {
                   />
                   <button
                     type="submit"
+                    id="confirmation"
                     onClick={() => {
                       setRequestVal("reject");
                     }}
@@ -176,7 +141,7 @@ export default function FqueuedTasks() {
                     Reject
                   </button>
                   <button
-                    className="cancel"
+                    id="cancel"
                     type="button"
                     onClick={() => {
                       setRequestFlag(0);
@@ -195,7 +160,7 @@ export default function FqueuedTasks() {
         ))
       ) : (
         <div className="requestedClients block1">
-          <h1>No Tasks in QUEUE ....................</h1>
+          <h3>No Tasks in QUEUE ....................</h3>
         </div>
       )}
     </>

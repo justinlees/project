@@ -31,7 +31,9 @@ import FProfile, {
 } from "./components/Freelancer/FProfile";
 import FdashBoard from "./components/Freelancer/Fdash_board";
 import FTasks from "./components/Freelancer/FTasks";
-import FacceptedTasks from "./components/Freelancer/FacceptedTasks";
+import FacceptedTasks, {
+  Action as AcceptedAction,
+} from "./components/Freelancer/FacceptedTasks";
 import FqueuedTasks, {
   Action as QueuedAction,
 } from "./components/Freelancer/FqueuedTasks";
@@ -58,6 +60,7 @@ import Manager, { Loader as Mloader } from "./Layouts/Manager/manager";
 import ManagerDashBoard from "./components/Manager/ManagerDashBoard";
 import MProfile from "./components/Manager/ManagerProfile";
 import MEarnings from "./components/Manager/MEarnings";
+import FRecent from "./components/Freelancer/FRecent";
 
 const router = createBrowserRouter([
   {
@@ -159,6 +162,17 @@ const router = createBrowserRouter([
           {
             path: "acceptedTasks",
             element: <FacceptedTasks />,
+            action: AcceptedAction,
+            children: [
+              {
+                path: ":userId/taskInfo",
+                element: <TaskInfo />,
+              },
+            ],
+          },
+          {
+            path: "recentTasks",
+            element: <FRecent />,
             children: [
               {
                 path: ":userId/taskInfo",
