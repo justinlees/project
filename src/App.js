@@ -22,18 +22,22 @@ import CrequestedTasks, {
   Action as RequestedAction,
 } from "./components/User/CrequestedTasks";
 import CacceptedTasks from "./components/User/CacceptedTasks";
-import CProfile,{Action as CDeleteAction} from "./components/User/CProfile";
+import CProfile, { Action as CDeleteAction } from "./components/User/CProfile";
 
 /* Freelancer Imports */
 import FreeLance, { Loader as Floader } from "./Layouts/Freelancer/freelancer";
-import FProfile,{Action as DeleteAction} from "./components/Freelancer/FProfile";
-import FdashBoard from "./components/Freelancer/fDashBoard";
+import FProfile, {
+  Action as DeleteAction,
+} from "./components/Freelancer/FProfile";
+import FdashBoard from "./components/Freelancer/Fdash_board";
 import FTasks from "./components/Freelancer/FTasks";
 import FacceptedTasks from "./components/Freelancer/FacceptedTasks";
 import FqueuedTasks, {
   Action as QueuedAction,
 } from "./components/Freelancer/FqueuedTasks";
-import Earnings,{Action as AddMoneyAction} from "./components/Freelancer/Earnings";
+import Earnings, {
+  Action as AddMoneyAction,
+} from "./components/Freelancer/Earnings";
 import TaskInfo from "./components/Freelancer/TaskInfo";
 import FMessages, {
   Action as MessageAction,
@@ -54,7 +58,6 @@ import Manager, { Loader as Mloader } from "./Layouts/Manager/manager";
 import ManagerDashBoard from "./components/Manager/ManagerDashBoard";
 import MProfile from "./components/Manager/ManagerProfile";
 import MEarnings from "./components/Manager/MEarnings";
-
 
 const router = createBrowserRouter([
   {
@@ -120,9 +123,9 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path:"profile",
-        element:<CProfile/>,
-        action:CDeleteAction,
+        path: "profile",
+        element: <CProfile />,
+        action: CDeleteAction,
       },
       {
         path: "settings",
@@ -142,7 +145,7 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <FProfile />,
-        action:DeleteAction,
+        action: DeleteAction,
       },
       {
         path: "tasks",
@@ -179,7 +182,7 @@ const router = createBrowserRouter([
       {
         path: "earnings",
         element: <Earnings />,
-        action:AddMoneyAction,
+        action: AddMoneyAction,
       },
       {
         path: "settings",

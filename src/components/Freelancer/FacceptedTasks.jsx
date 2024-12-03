@@ -3,6 +3,7 @@ import { useOutletContext, Link, Outlet } from "react-router-dom";
 
 export default function FacceptedTasks() {
   const freelancerData = useOutletContext();
+  const[goBack,setGoBack] = React.useState("");
   return (
     <>
       {freelancerData.tasksAssigned?.map((item) => (
@@ -10,17 +11,8 @@ export default function FacceptedTasks() {
           <div className="acceptedRequests">
             <h3>{item.clientId}</h3>
             <div className="acceptButtons">
-              <button type="button">
-                <Link
-                  to={`${item.clientId}/taskInfo`}
-                  style={{
-                    color: "black",
-                    textDecoration: "none",
-                    display: "block",
-                  }}
-                >
-                  Info
-                </Link>
+              <button type="button" onClick={()=>{setGoBack(item.clientId)}}>              
+                Info
               </button>
               <button type="button" style={{ backgroundColor: "black" }}>
                 <Link
@@ -36,7 +28,14 @@ export default function FacceptedTasks() {
               </button>
             </div>
           </div>
-          <Outlet context={item} />
+
+          {goBack?<div className="taskInfo" id={item.clientId} >
+            <section>{item?.taskName}</section>
+            <section>{item?.taskDescription}</section>
+            <section onClick={()=>{setGoBack(0)}}>
+              &larr; back
+            </section>
+          </div>:""}          
         </div>
       ))}
     </>

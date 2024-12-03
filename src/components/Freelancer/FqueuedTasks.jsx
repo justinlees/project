@@ -50,9 +50,7 @@ export default function FqueuedTasks() {
                   className="accept"
                   type="submit"
                   onClick={(e) => {
-                    e.preventDefault();
                     setRequestVal("accept");
-                    return <div></div>
                   }}
                 >
                   Accept

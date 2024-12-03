@@ -9,12 +9,17 @@ export default function CAcceptedTasks() {
       className="connections"
       style={{
         backgroundColor: "whitesmoke",
-        width: "10rem",
+        width:"100%",
+        height:"100%",
       }}
     >
       {errors?.cancel && <span>{errors.cancel}</span>}
       {requestedTasks.tasksRequested?.map((item) => (
-        <div>
+        <div style={{
+          backgroundColor: "whitesmoke",
+          width: "100%",
+          height:"100%",
+        }}>
           <p>{item.taskName}</p>
           <p>{item.taskDescription}</p>
           <Link to={`../${item.lancerId}/messages`}>Message</Link>

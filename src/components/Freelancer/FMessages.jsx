@@ -23,7 +23,7 @@ export default function FMessages() {
             if (item.clientId === params.userId) {
               return (
                 <div>
-                  <p>{item.clientId}</p>
+                  <p><b>{item.clientId}</b></p>
                   <p>{item.taskName}</p>
                   <p>{item.taskDescription}</p>
                 </div>

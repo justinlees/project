@@ -6,6 +6,8 @@
   position: fixed;
   overflow: auto;
   background-color: whitesmoke;
+  background-color: black;
+  background-color: #020202;
 }
 
 .HomePage .topNav {
@@ -16,6 +18,8 @@
   align-items: center;
   position: fixed;
   background-color: #ededed;
+  background-color: black;
+  background-color: #020202;
 }
 
 .HomePage .topNav .left {
@@ -112,6 +116,7 @@
   width: 5rem;
   height:2.5rem;
   background-color: #111;
+  
   color:#fdfdfd;
   border: none;
   border-top-right-radius: 8px;
@@ -122,25 +127,36 @@
   width: 100%;
   height: 100%;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   overflow: scroll;
+  margin-top:2rem;
   margin-bottom: 9rem;
   background-color: whitesmoke;
+  background-color: #020202;
   position: relative;
 }
 
+.HomePage .MainPage .freelancersDisplay .row{
+  width:100%;
+  height:20rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 5;
+  align-items: center;
+}
+
+
 .HomePage .MainPage .freelancerData {
-  width: 12rem;
-  height: 17rem;
-  padding: 0.5rem;
+  width: 15rem;
+  height: 18rem;
+  padding: 0.7rem;
   margin: 2rem;
   display: flex;
   flex-direction: column;
-  -border: 1px solid black;
+  border: 1px solid white;
   border-radius: 8px;
-  background-color: white;
-  box-shadow: 2px 2px 6px #555;
+  color:white;
+  -background-color: white;
+  box-shadow: 1px 1px 6px 1px #eee;
 }
 
 .HomePage .MainPage .freelancerData .lancerDetails {
@@ -161,31 +177,44 @@
 .HomePage .ClientTasks {
   width:100%;
   height:100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: aqua;
+  margin-top:7rem;
+  background-color: #020202;
+  display:flex;
+  flex-direction:column;
 }
 
-.HomePage .ClientTasks .top-nav div {
-  width: 8rem;
+.HomePage .ClientTasks .top-nav{
+  display:flex;
+  width:12rem;
+  height:100%;
+}
+
+.HomePage .ClientTasks .top-nav .navigations {
+  width: 12rem;
   line-height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-} 
+}
+
+.HomePage .ClientTasks .top-nav .taskInfo{
+  width:100%;
+}
 
 .top-nav a {
   text-decoration: none;
-  color: black;
   font-weight: bold;
   transition: all 0.8s;
 }
 
-.top-nav .activeTasks div {
+.top-nav a .navigations{
+  color:tomato;
+}
+
+.top-nav .activeTasks .navigations {
+  color: black;
   background-color: whitesmoke;
   border-bottom: 4px solid tomato;
-  color: black;
 }
 
 /* top-nav ended */

@@ -20,7 +20,6 @@ export default function FMessageDisplay() {
 
   return (
     <div className="messageDisplay">
-      <h1>Messages goes here</h1>
       {allMessages.allMessages ? (
         allMessages.allMessages.map((item) => (
           <div
@@ -30,7 +29,7 @@ export default function FMessageDisplay() {
           </div>
         ))
       ) : (
-        <p>loading</p>
+        <p>loading....</p>
       )}
     </div>
   );
