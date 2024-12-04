@@ -6,17 +6,19 @@ export default function MessageEntry() {
   const lancerId = useParams();
   return (
     <div className="CmessageEntry">
-      <h2>{lancerId.fUser}</h2>
-      <Outlet />
-      <Form method="post">
-        <input
-          type="text"
-          placeholder="message...."
-          name="msgContent"
-          required
-        />
-        <button type="submit">Send</button>
-      </Form>
+      <div className="block">
+        <h2>{lancerId.fUser}</h2>
+        <Outlet />
+        <Form method="post">
+          <input
+            type="text"
+            placeholder="message...."
+            name="msgContent"
+            required
+          />
+          <button type="submit">Send</button>
+        </Form>
+      </div>
     </div>
   );
 }

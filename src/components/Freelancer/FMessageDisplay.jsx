@@ -16,7 +16,7 @@ export default function FMessageDisplay() {
         .then((data) => setMessages(data.data));
     };
     setInterval(messageFetch, 300);
-  }, [params]);
+  }, []);
 
   return (
     <div className="messageDisplay">
