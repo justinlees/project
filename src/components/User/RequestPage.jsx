@@ -11,21 +11,51 @@ export default function RequestPage() {
 
   return (
     <div className="requestPage">
-      <h1>Task Description Page</h1>
+      <h1>Task Request Page</h1>
       {filterData?.map((item) => (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignContent: "center",
+            width: "40rem",
+            height: "30rem",
+            marginTop: "2rem",
+            borderRadius: "8px",
+            border: "1px solid black",
+            boxShadow: "1px 1px 4px #222",
+          }}
+        >
           <div className="left">
             <ul>
               <li>
-                <b>{item?.UserName}</b>
+                <b>ClientInfo:</b>
               </li>
-              <li>{item?.FirstName}</li>
-              <li>{item?.LastName}</li>
-              <li>{item?.MobileNo}</li>
+              <li>
+                Name:
+                <br />
+                <b>
+                  {item?.FirstName} {item?.LastName}
+                </b>
+              </li>
+              <li>
+                Email:
+                <br />
+                <b>{item.email}</b>
+              </li>
+              <li>
+                Mobile:
+                <br />
+                <b>{item?.MobileNo}</b>
+              </li>
             </ul>
           </div>
           <div className="right">
             <Form method="post">
+              <h3>
+                ClientId:
+                <b> {item?.UserName}</b>
+              </h3>
               <input type="text" value={params.fUser} name="lancerId" />
               <input
                 type="text"

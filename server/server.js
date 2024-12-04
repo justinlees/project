@@ -262,7 +262,12 @@ app.post("/home/:userId/tasks", async (req, res) => {
 app.post("/home/:userId/:fUser/requestPage", async (req, res) => {
   const { lancerId, clientId, taskName, taskDescription } = req.body;
 
-  const connectionCheck = await collectionF.findOne({
+  const connectionCheck = await collectionMsg.findOne({
+    lancerId: lancerId,
+    clientId: clientId,
+  });
+
+  const lancerConnectionCheck = await collectionF.findOne({
     UserName: lancerId,
     bufferRequests: { $elemMatch: { clientId: clientId } },
   });
@@ -272,7 +277,7 @@ app.post("/home/:userId/:fUser/requestPage", async (req, res) => {
     bufferRequests: { $elemMatch: { lancerId: lancerId } },
   });
 
-  if (!connectionCheck) {
+  if (!connectionCheck && !lancerConnectionCheck) {
     const freelancer = await collectionF.findOneAndUpdate(
       { UserName: lancerId },
       {
@@ -287,7 +292,7 @@ app.post("/home/:userId/:fUser/requestPage", async (req, res) => {
     );
   }
 
-  if (!clientConnectionCheck) {
+  if (!connectionCheck && !clientConnectionCheck) {
     const user = await collectionC.findOneAndUpdate(
       { UserName: clientId },
       {
@@ -467,7 +472,6 @@ app.post("/freelancer/:fUser/profile", async (req, res) => {
 });
 
 app.post("/freelancer/:fUser/tasks/acceptedTasks", async (req, res) => {
-  console.log("accepted");
   const taskFinish = await collectionF.findOneAndUpdate(
     { UserName: req.params.fUser },
     { $pull: { tasksAssigned: { clientId: req.body.clientId } } }

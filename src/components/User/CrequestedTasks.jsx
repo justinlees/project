@@ -11,26 +11,29 @@ export default function CRequestedTasks() {
   const requestedTasks = useOutletContext();
   const errors = useActionData();
   return (
-    <div
-      className="connections"
-      style={{
-        backgroundColor: "whitesmoke",
-        width: "10rem",
-      }}
-    >
+    <div className="connections">
+      <h1>Queued Tasks</h1>
       {errors?.cancel && <span>{errors.cancel}</span>}
       {requestedTasks.bufferRequests?.map((item) => (
-        <div>
-          <h2>{item.taskName}</h2>
-          <p>{item.taskDescription}</p>
+        <div className="block1">
           <Form method="post">
+            <h3>TaskName: {item.taskName}</h3>
+            <p>Description: {item.taskDescription}</p>
             <input
               type="text"
               value={requestedTasks.UserName}
               name="UserName"
+              style={{ display: "none" }}
             />
-            <input type="text" value={item.lancerIds} name="lancerIds" />
-            <button type="submit">Cancel</button>
+            <input
+              type="text"
+              value={item.lancerIds}
+              name="lancerIds"
+              style={{ display: "none" }}
+            />
+            <button type="submit" style={{ width: "6rem", lineHeight: "2rem" }}>
+              Cancel
+            </button>
           </Form>
         </div>
       ))}

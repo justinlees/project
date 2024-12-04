@@ -8,33 +8,31 @@ export default function CTasks() {
   return (
     <div className="ClientTasks">
       <div className="top-nav">
-
         <section>
-        <NavLink
-          to="."
-          end
-          className={({ isActive }) => (isActive ? "activeTasks" : "")}
-        >e 
-          <div className="navigations">Queued</div>
-        </NavLink>
-      n  <NavLink
-          to="acceptedTasks"
-          className={({ isActive }) => (isActive ? "activeTasks" : "")}
-        >
-          <div className="navigations">Accepted</div>
-        </NavLink>
-        <NavLink
-          to="recentTasks"
-          className={({ isActive }) => (isActive ? "activeTasks" : "")}
-        >
-          <div className="navigations">Recent</div>
-        </NavLink>
+          <NavLink
+            to="."
+            end
+            className={({ isActive }) => (isActive ? "activeTasks" : "")}
+          >
+            <div className="navigations">Queued</div>
+          </NavLink>
+          <NavLink
+            to="acceptedTasks"
+            className={({ isActive }) => (isActive ? "activeTasks" : "")}
+          >
+            <div className="navigations">Accepted</div>
+          </NavLink>
+          <NavLink
+            to="recentTasks"
+            className={({ isActive }) => (isActive ? "activeTasks" : "")}
+          >
+            <div className="navigations">Recent</div>
+          </NavLink>
         </section>
-        <div className="taskInfo">
-        <Outlet context={requestedTasks} />
+        <div className="taskData">
+          <Outlet context={requestedTasks} />
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 }
