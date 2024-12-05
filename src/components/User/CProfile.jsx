@@ -19,16 +19,15 @@ export default function CProfile() {
       </div>
       <div className="briefDetails">
         <div className="block1">
-          <img alt="" />
           <h3>UserName: {clientData.user.UserName}</h3>
           <br />
           <p>FirstName: {clientData.user.FirstName}</p>
           <p>LastName: {clientData.user.LastName}</p>
-          <p>Email: {clientData.user.email}</p>
+          <p>Email: {clientData.user.Email}</p>
           <p>Phone Number: {clientData.user.MobileNo}</p>
           <Form method="POST">
             <legend>Delete Account</legend>
-            <input type="text" value="delete" name="delete" />
+            <input type="text" value="delete" name="delete" style={{display: "none"}}/>
             <button>Delete</button>
           </Form>
         </div>

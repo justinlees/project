@@ -15,8 +15,8 @@ export default function Admin() {
         <>
           <Header />
           <div className="mainContent">
-            <AsideBar />
-            <Outlet context={pageContent}/>
+            <AsideBar UserName={pageContent.admin.UserName} />
+            <Outlet context={pageContent} />
           </div>
         </>
       ) : (

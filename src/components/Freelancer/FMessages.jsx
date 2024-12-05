@@ -23,9 +23,7 @@ export default function FMessages() {
             if (item.clientId === params.userId) {
               return (
                 <div style={{ backgroundColor: "#afafaf" }}>
-                  <p>
-                    <b>{item.clientId}</b>
-                  </p>
+                  <p>{item.clientId}</p>
                   <p>{item.taskName}</p>
                   <p>{item.taskDescription}</p>
                 </div>

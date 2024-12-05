@@ -1,5 +1,13 @@
 import React from "react";
-import { NavLink, useParams, Navigate } from "react-router-dom";
+import { NavLink, useParams, Navigate, redirect } from "react-router-dom";
+
+const handleLogout = () => {
+  // Remove the token from local storage
+  localStorage.removeItem('token');
+
+  // Redirect to the home page
+  window.location.href = '/';
+};
 
 export default function FsideBar() {
   const params = useParams();
@@ -7,11 +15,9 @@ export default function FsideBar() {
     <nav className="fSideBar">
       <div className="top">
         <figure>
-          <img src="" alt="" />
           <figcaption>{params.fUser.charAt(0).toUpperCase()}</figcaption>
         </figure>
         <h2>{params.fUser}</h2>
-        <h3>Rating:$$$$$</h3>
         <hr />
       </div>
       <div className="middle">
@@ -70,7 +76,7 @@ export default function FsideBar() {
         </ul>
       </div>
       <div className="bottom">
-        <button>&larr; Collapse</button>
+        <button onClick={handleLogout}>Logout</button>
       </div>
     </nav>
   );

@@ -31,4 +31,5 @@ export async function Action({ request, params }) {
   );
   if (response.data)
     return redirect(`/home/${params.userId}/tasks/${params.fUser}/messages`);
+  return null;
 }

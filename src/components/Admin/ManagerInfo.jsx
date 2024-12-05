@@ -1,71 +1,52 @@
 import React from "react";
-import { Form, useActionData, redirect } from "react-router-dom";
+import { Form, useLoaderData, redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function ManagersInfo() {
-  const errors = useActionData();
+  const allLancers = useLoaderData();
+  console.log(allLancers);
   return (
     <div className="adminDetail">
       <div className="topHeader">
         <h1>
-          <span>Managers</span> Info
+          <span>Freelancer</span> Info
         </h1>
       </div>
       <div className="briefDetails">
-        <div className="graph">
-          <div className="innerGraph"></div>
-        </div>
-        <div className="briefContent">
-          <Form method="post">
-            <div className="display1">
-              <fieldset>
-                <label>Enter your FirstName</label>
-                <input type="text" name="FirstName" />
-                {errors?.FirstName && <p>Enter Valid String</p>}
+        {allLancers?.map((item) => (
+          <div className="briefContent">
+            <h3>UserName: {item.UserName}</h3>
+            <p>Email: {item.Email}</p>
+            <p>Mobile: {item.MobileNo}</p>
+            <Form method="post">
+              <div className="display1">
+                <input
+                  type="text"
+                  name="lancerId"
+                  value={item.UserName}
+                  style={{ display: "none" }}
+                />
+              </div>
+              <fieldset style={{ border: "none" }}>
+                <button
+                  type="submit"
+                  style={{
+                    width: "6rem",
+                    lineHeight: "2rem",
+                    backgroundColor: "tomato",
+                    margin: "1rem",
+                    border: "1px solid black",
+                    borderRadius: "8px",
+                    boxShadow: "1px 1px 6px #333",
+                    cursor: "pointer",
+                  }}
+                >
+                  Delete
+                </button>
               </fieldset>
-              <fieldset>
-                <label>Enter your LastName</label>
-                <input type="text" name="LastName" />
-              </fieldset>
-              <fieldset>
-                <label>Enter your DOB</label>
-                <input type="date" name="DOB" />
-              </fieldset>
-            </div>
-            <div className="display1">
-              <fieldset>
-                <label>Enter a UserName</label>
-                <input type="text" name="UserName" />
-              </fieldset>
-              <fieldset>
-                <label>Enter Password</label>
-                <input type="password" name="Password" />
-              </fieldset>
-              <fieldset>
-                <label>Enter your Email</label>
-                <input type="email" name="Email" />
-              </fieldset>
-            </div>
-            <div className="display1">
-              <fieldset>
-                <label>BankAccount No. </label>
-                <input type="Number" name="AccNumber" />
-              </fieldset>
-              <fieldset>
-                <label>IFSC Code</label>
-                <input type="text" name="IFSCcode" />
-              </fieldset>
-              <fieldset>
-                <label>Enter Banking Name</label>
-                <input type="text" name="BankingName" />
-              </fieldset>
-            </div>
-            <fieldset>
-              <button type="button">Back</button>
-              <button type="submit">Submit</button>
-            </fieldset>
-          </Form>
-        </div>
+            </Form>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -73,29 +54,23 @@ export default function ManagersInfo() {
 
 export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
-  const errors = {};
-  console.log("45678");
-  const nameRegEx = /^[a-zA-Z]+$/;
-  const userNameRegEx = /^[a-zA-Z]+\d{2}$/;
-  const passwordRegEx = /^[a-zA-Z]{8,}$/;
-  if (!nameRegEx.test(formData.FirstName))
-    errors.FirstName = "Enter a valid String";
-  if (!nameRegEx.test(formData.LastName))
-    errors.LastName = "Enter a valid String";
-  if (!userNameRegEx.test(formData.UserName))
-    errors.UserName = "username example: example17";
-  if (!passwordRegEx.test(formData.Password))
-    errors.Password = "Enter a valid String";
-  if (Object.keys(errors).length) {
-    return errors;
-  }
-  console.log("45678");
+
   const response = await axios.post(
-    `http://localhost:5500/admin/${params.aUser}/managersInfo`,
+    `http://localhost:5500/admin/${params.aUser}/utilities`,
     formData
   );
   console.log(response.data);
   if (response.data) {
-    return redirect(`/admin/${params.aUser}`);
+    return "";
+  }
+}
+
+export async function Loader({ request, params }) {
+  const res = await axios
+    .get(`http://localhost:5500/admin/${params.aUser}/utilities`)
+    .then((res) => res)
+    .then((data) => data.data);
+  if (res) {
+    return res;
   }
 }

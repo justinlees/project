@@ -123,93 +123,98 @@
   width: 100%;
   height: 100%;
   display: flex;
-  overflow: hidden;
-  margin-top: 2rem;
-  margin-bottom: 10rem;
-  background-color: whitesmoke;
-  position: relative;
+  flex-wrap: wrap;
   overflow: scroll;
+  margin-top: 2rem;
+  margin-bottom: 9rem;
+  background-color: white;
+  /* Black background */
+  position: relative;
 }
 
 .HomePage .MainPage .freelancersDisplay .row {
   width: 100%;
-  height: 25rem;
-  background-color: chartreuse;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: space-around;
+  /* Ensure blocks are aligned side by side */
+  align-items: flex-start;
 }
 
 .HomePage .MainPage .freelancerData {
-  width: 40rem;
-  height: 20rem;
-  padding: 0.7rem;
-  margin: 3rem;
+  width: 18rem;
+  height: 22rem;
+  padding: 1rem;
+  margin: 1.5rem;
+  /* Adjusted margin for better spacing */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid white;
-  border-radius: 8px;
-  color: white;
-  -background-color: white;
-  box-shadow: 1px 1px 6px 1px #eee;
-  transition: 0.8s all;
+  flex-direction: column;
+  border: 1px solid grey;
+  /* Green border for visibility */
+  border-radius: 10px;
+  color: black;
+  /* Green text color */
+  background-color: white;
+  /* Dark gray background for contrast */
+  box-shadow: 0 0 10px black;
+  /* Green shadow for focus */
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.HomePage .MainPage .freelancerDataModify {
-  width: 20rem;
-  height: 15rem;
-  padding: 0.7rem;
-  margin: 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid white;
-  border-radius: 8px;
-  color: white;
-  -background-color: white;
-  box-shadow: 1px 1px 6px 1px #eee;
-}
-
-.HomePage .MainPage .freelancerData .inner-freelancerData {
-  width: 80%;
-  height: 100%;
+.HomePage .MainPage .freelancerData:hover {
+  transform: scale(1.05);
+  /* Slight zoom on hover */
+  box-shadow: 0 0 12px black;
 }
 
 .HomePage .MainPage .freelancerData .lancerDetails {
   width: 100%;
-  height: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  background-color: aqua;
 }
 
-.HomePage .MainPage .freelancerDataModify .lancerDetails {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: aqua;
+.freelancersDisplay .lancerDetails h3 {
+  font-size: 1rem;
+  /* Adjust text size */
+  margin: 5px 0;
+  white-space: nowrap;
+  /* Prevent wrapping */
+  overflow: hidden;
+  /* Hide overflow */
+  text-overflow: ellipsis;
+  /* Add ellipsis (...) for overflowed text */
+  max-width: 250px;
+  /* Limit text width */
 }
 
 .HomePage .MainPage .freelancerData .lancerDetails img {
-  width: 150px;
-  height: 150px;
-  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  /* Green border for profile image */
+  border-radius: 50%;
+  /* Circular image */
   margin: auto;
-  margin-left: 2rem;
   margin-top: 1rem;
 }
 
-.HomePage .MainPage .freelancerDataModify .lancerDetailsModify img {
-  width: 80px;
-  height: 80px;
-  border: 1px solid black;
-  margin: auto;
-  margin-left: 2rem;
-  margin-top: 1rem;
+.HomePage .MainPage .freelancerData .lancerDetails h4 {
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+  color: #00ff00;
+  /* Green text for titles */
+  text-align: center;
+}
+
+.HomePage .MainPage .freelancerData .lancerDetails p {
+  margin: 0.8rem 0;
+  color: #ccc;
+  /* Light gray text for descriptions */
+  font-size: 1rem;
+  text-align: center;
 }
 
 .HomePage .ClientTasks {
@@ -217,7 +222,7 @@
   height: 100%;
   margin-top: 7rem;
   display: flex;
-  background-color: aqua;
+  overflow: scroll;
 }
 
 .HomePage .ClientTasks .top-nav {
@@ -443,6 +448,7 @@
   overflow-y: scroll;
   background-color: rgb(240, 240, 240);
 }
+
 .CmessageEntry input {
   border: none;
   background-color: #dedede;
@@ -451,6 +457,7 @@
   padding: 0.2rem;
   padding-left: 0.5rem;
 }
+
 .CmessageEntry button {
   border: none;
   width: 4rem;
@@ -459,6 +466,7 @@
   background-color: #111;
   color: white;
 }
+
 .CmessageDisplay .clientMsg {
   width: 10rem;
   margin: 8px;
@@ -476,4 +484,152 @@
   border-radius: 6px;
   background-color: black;
   color: whitesmoke;
+}
+
+.userDetail {
+  margin-top: 8rem;
+  padding: 20px;
+  /* Add padding around the entire profile container */
+  max-width: 800px;
+  /* Restrict the maximum width for readability */
+  background-color: #f9f9f9;
+  /* Light background color for distinction */
+  border-radius: 8px;
+  /* Add rounded corners to the container */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for a lifted effect */
+}
+
+.topHeader {
+  text-align: center;
+  /* Center-align the heading text */
+  margin-bottom: 20px;
+  /* Add space below the header */
+}
+
+.topHeader h1 {
+  font-size: 28px;
+  /* Ensure the heading size is prominent */
+  margin: 0;
+  /* Remove default margin */
+  color: #333;
+  /* Dark text color for readability */
+}
+
+.userDetail .briefDetails {
+  display: flex;
+  /* Use flex layout for better alignment */
+  flex-direction: column;
+  /* Stack items vertically */
+  align-items: center;
+  /* Center-align the content */
+  gap: 20px;
+  /* Add spacing between blocks */
+}
+
+.userDetail .briefDetails .block1 {
+  width: 100%;
+  /* Make block responsive */
+  max-width: 400px;
+  /* Limit the maximum width */
+  padding: 20px;
+  /* Add padding inside the block */
+  background-color: #fff;
+  /* White background for card-style look */
+  border: 1px solid #ddd;
+  /* Light border for distinction */
+  border-radius: 8px;
+  /* Rounded corners for the block */
+  text-align: left;
+  /* Align text to the left */
+}
+
+.userDetail .briefDetails .block1 img {
+  width: 100px;
+  /* Set a fixed width for the image */
+  height: 100px;
+  /* Set a fixed height for the image */
+  border-radius: 50%;
+  /* Make the image circular */
+  object-fit: cover;
+  /* Ensure the image scales properly */
+  margin-bottom: 15px;
+  /* Add space below the image */
+}
+
+.userDetail .briefDetails .block1 h3 {
+  font-size: 20px;
+  /* Slightly larger font size for the username */
+  margin: 10px 0;
+  /* Add spacing around the username */
+  color: #444;
+  /* Darker text color */
+}
+
+.userDetail .briefDetails .block1 p {
+  font-size: 16px;
+  /* Set consistent font size for details */
+  margin: 5px 0;
+  /* Add spacing between paragraphs */
+  color: #666;
+  /* Slightly muted color for secondary text */
+}
+
+.userDetail .briefDetails .block1 legend {
+  font-weight: bold;
+  /* Make the legend text bold */
+  margin-bottom: 10px;
+  /* Add space below the legend */
+}
+
+.userDetail .briefDetails .block1 input[type="text"] {
+  width: 100%;
+  /* Full width for the input field */
+  padding: 8px;
+  /* Add padding for better usability */
+  margin-bottom: 10px;
+  /* Add space below the input field */
+  border: 1px solid #ccc;
+  /* Light border for the input */
+  border-radius: 4px;
+  /* Rounded corners for input */
+}
+
+.userDetail .briefDetails .block1 button {
+  padding: 10px 15px;
+  /* Add padding for button */
+  background-color: #ff4d4d;
+  /* Red background for delete button */
+  color: white;
+  /* White text color */
+  border: none;
+  /* Remove border */
+  border-radius: 4px;
+  /* Rounded corners for the button */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  transition: background-color 0.3s;
+  /* Smooth hover transition */
+}
+
+.userDetail .briefDetails .block1 button:hover {
+  background-color: #e60000;
+  /* Darker red on hover */
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+  .userDetail .briefDetails .briefDetails {
+    flex-direction: column;
+    /* Stack items vertically on smaller screens */
+    gap: 15px;
+    /* Adjust spacing */
+  }
+
+  .userDetail .briefDetails .block1 {
+    width: 90%;
+    /* Reduce the width for smaller screens */
+    margin: 0 auto;
+    /* Center align the block */
+  }
 }

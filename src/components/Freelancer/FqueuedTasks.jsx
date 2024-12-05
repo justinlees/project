@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  useOutletContext,
-  Form,
-  Link,
-  Outlet,
-  redirect,
-} from "react-router-dom";
+import { useOutletContext, Form, Outlet, redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function FqueuedTasks() {
@@ -13,21 +7,19 @@ export default function FqueuedTasks() {
   const [requestVal, setRequestVal] = React.useState("");
   const [acceptFlag, setAcceptFlag] = React.useState("");
   const [requestFlag, setRequestFlag] = React.useState("");
-  console.log(acceptFlag);
-  console.log(requestVal);
   return (
     <>
       {freelancerData.bufferRequests.length ? (
         freelancerData.bufferRequests.map((item) => (
           <div className="requestedClients block1">
             <h3>{item.clientIds}</h3>
+            <p>{item.taskName}</p>
+            <p>{item.taskDescription}</p>
             <div className="requestButtons">
-              <button type="button" style={{ backgroundColor: "turquoise" }}>
-                <Link to="taskInfo">Info</Link>
-              </button>
               <button
                 className="accept"
                 type="button"
+                style={{ backgroundColor: "cyan" }}
                 onClick={() => {
                   setAcceptFlag(1);
                 }}

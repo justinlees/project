@@ -156,14 +156,40 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  overflow: auto;
+  overflow: scroll;
 }
 
 .adminDashBoard .adminDetail .briefDetails .briefContent {
   width: 80%;
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: rgb(240, 240, 240);
+  padding: 2rem; /* Increase padding for better spacing */
+  border-radius: 12px; /* Slightly more rounded corners */
+  background-color: rgb(240, 240, 240); /* Light background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 1rem auto; /* Center align and add margin */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+}
+
+.adminDashBoard .adminDetail .briefDetails .briefContent:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+  transform: translateY(-5px); /* Slight raise effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Enhance shadow on hover */
+}
+
+.adminDashBoard .adminDetail .briefDetails .briefContent h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem; /* Add spacing below the heading */
+  color: rgb(233, 60, 75); /* Emphasize the username with a color */
+  text-align: center; /* Center-align the username */
+}
+
+.adminDashBoard .adminDetail .briefDetails .briefContent p {
+  font-size: 1.2rem;
+  margin: 0.8rem 0; /* Space between paragraphs */
+  color: #333; /* Darker text for readability */
+}
+
+.adminDashBoard .adminDetail .briefDetails .briefContent p strong {
+  font-weight: bold; /* Emphasize the labels with bold text */
 }
 
 .adminDashBoard .adminDetail .briefDetails .graph {
@@ -234,7 +260,37 @@
 
 .adminDashBoard .adminProfile .briefDetails .briefContent {
   width: 80%;
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: rgb(240, 240, 240);
+  padding: 2rem; /* Increase padding for better spacing */
+  border-radius: 12px; /* Rounded corners for a soft look */
+  background-color: rgb(
+    245,
+    245,
+    245
+  ); /* Slightly different background color for profile */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  margin: 1rem auto; /* Center align and add spacing around content */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+}
+
+.adminDashBoard .adminProfile .briefDetails .briefContent:hover {
+  background-color: #e5e5e5; /* Change background color on hover */
+  transform: translateY(-5px); /* Slight upward movement on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.adminDashBoard .adminProfile .briefDetails .briefContent h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem; /* More spacing below the heading */
+  color: rgb(233, 60, 75); /* Highlight the profile name with this color */
+  text-align: center; /* Center-align the profile name */
+}
+
+.adminDashBoard .adminProfile .briefDetails .briefContent p {
+  font-size: 1.2rem;
+  margin: 0.8rem 0; /* Consistent spacing between paragraphs */
+  color: #333; /* Ensure good contrast for readability */
+}
+
+.adminDashBoard .adminProfile .briefDetails .briefContent p strong {
+  font-weight: bold; /* Bold the labels like "FirstName", "LastName", etc. */
 }

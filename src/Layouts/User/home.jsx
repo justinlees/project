@@ -11,6 +11,14 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import "../../styles/home.css";
 
+const handleLogout = () => {
+  // Remove the token from local storage
+  localStorage.removeItem('token');
+
+  // Redirect to the home page
+  window.location.href = '/';
+};
+
 function Home() {
   const clientData = useLoaderData();
   const [searchParams] = useSearchParams();
@@ -57,19 +65,19 @@ function Home() {
 
               <div>
                 <NavLink
-                  to="payments"
+                  to="settings"
                   className={({ isActive }) => (isActive ? "activeTasks" : "")}
                 >
-                  Payments
+                  Settings
                 </NavLink>
               </div>
 
               <div>
                 <NavLink
-                  to="settings"
-                  className={({ isActive }) => (isActive ? "activeTasks" : "")}
+                  onClick={handleLogout}
+                  className={({ isActive }) => (false ? "activeTasks" : "")}
                 >
-                  Settings
+                  Logout
                 </NavLink>
               </div>
             </div>

@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import FsignUp, { Action as FsignUpAction } from "./components/FsignUp";
 import CsignUp, { Action as CsignUpAction } from "./components/CsignUp";
 import Login, { Action as loginAction } from "./components/login";
+import ForgotPassword from "./components/forgotPassword";
 import Settings from "./components/Settings";
 
 /*Client Imports */
@@ -23,13 +24,14 @@ import CrequestedTasks, {
 } from "./components/User/CrequestedTasks";
 import CacceptedTasks from "./components/User/CacceptedTasks";
 import CProfile, { Action as CDeleteAction } from "./components/User/CProfile";
+import CRecent from "./components/User/CRecent";
 
 /* Freelancer Imports */
 import FreeLance, { Loader as Floader } from "./Layouts/Freelancer/freelancer";
 import FProfile, {
   Action as DeleteAction,
 } from "./components/Freelancer/FProfile";
-import FdashBoard from "./components/Freelancer/Fdash_board";
+import FdashBoard from "./components/Freelancer/fDashBoard";
 import FTasks from "./components/Freelancer/FTasks";
 import FacceptedTasks, {
   Action as AcceptedAction,
@@ -48,11 +50,14 @@ import FMessageDisplay from "./components/Freelancer/FMessageDisplay";
 
 /* Admin Imports */
 import Admin, { Loader as ALoader } from "./Layouts/Admin/admin";
-import AdminDashBoard from "./components/Admin/AdminDashBoard";
+import AdminDashBoard, {
+  Loader as ClientsLoader,
+} from "./components/Admin/AdminDashBoard";
 import Profit from "./components/Admin/Profit";
 import AProfile from "./components/Admin/AdminProfile";
-import ManagersInfo, {
+import Utilities, {
   Action as MAction,
+  Loader as UtilityLoader,
 } from "./components/Admin/ManagerInfo";
 
 /* Manager Imports */
@@ -61,6 +66,7 @@ import ManagerDashBoard from "./components/Manager/ManagerDashBoard";
 import MProfile from "./components/Manager/ManagerProfile";
 import MEarnings from "./components/Manager/MEarnings";
 import FRecent from "./components/Freelancer/FRecent";
+import ErrorPage from "./components/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +88,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
     action: loginAction,
+  },
+  {
+    path: "/forgotPassword",
+    element: <ForgotPassword />,
   },
   //User routes
   {
@@ -111,6 +121,10 @@ const router = createBrowserRouter([
           {
             path: "acceptedTasks",
             element: <CacceptedTasks />,
+          },
+          {
+            path: "recentTasks",
+            element: <CRecent />,
           },
         ],
       },
@@ -219,8 +233,9 @@ const router = createBrowserRouter([
       },
       {
         path: "managersInfo",
-        element: <ManagersInfo />,
+        element: <Utilities />,
         action: MAction,
+        loader: UtilityLoader,
       },
       {
         path: "profile",
@@ -250,6 +265,10 @@ const router = createBrowserRouter([
         element: <MEarnings />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);
 

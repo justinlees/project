@@ -12,9 +12,6 @@ export default function CAcceptedTasks() {
         <div className="block1">
           <article>
             <p>
-              <b>TaskName:</b> {item.lancerId}
-            </p>
-            <p>
               <b>TaskName:</b> {item.taskName}
             </p>
             <p>

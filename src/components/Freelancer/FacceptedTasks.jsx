@@ -1,10 +1,9 @@
 import React from "react";
-import { useOutletContext, Link, Outlet, Form } from "react-router-dom";
+import { useOutletContext, Link, Form } from "react-router-dom";
 import axios from "axios";
 
 export default function FacceptedTasks() {
   const freelancerData = useOutletContext();
-  const [goBack, setGoBack] = React.useState("");
   const [Mark, setMark] = React.useState("");
   return (
     <>
@@ -13,15 +12,9 @@ export default function FacceptedTasks() {
           <div className="acceptedTasks block1">
             <div className="acceptedRequests">
               <h3>{item.clientId}</h3>
+              <p>{item.taskName}</p>
+              <p>{item.taskDescription}</p>
               <div className="acceptButtons">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setGoBack(item.clientId);
-                  }}
-                >
-                  Info
-                </button>
                 <button type="button" style={{ backgroundColor: "black" }}>
                   <Link
                     to={`../${item.clientId}/messages`}
@@ -75,22 +68,6 @@ export default function FacceptedTasks() {
                 )}
               </div>
             </div>
-
-            {goBack ? (
-              <div className="taskInfo" id={item.clientId}>
-                <section>{item?.taskName}</section>
-                <section>{item?.taskDescription}</section>
-                <section
-                  onClick={() => {
-                    setGoBack(0);
-                  }}
-                >
-                  &larr; back
-                </section>
-              </div>
-            ) : (
-              ""
-            )}
           </div>
         ))
       ) : (

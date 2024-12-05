@@ -15,10 +15,12 @@ export default function FsignUp() {
   const [formData, setFormData] = useState({
     FirstName: "",
     LastName: "",
+    DOB: new Date(),
     UserName: "",
     Email: "",
     Password: "",
     MobileNo: "",
+    OTP: "",
   });
 
   const [page, setPage] = useState(1);
@@ -26,17 +28,25 @@ export default function FsignUp() {
   const [nextButton, setNextButton] = useState(true);
   const [submitButton, setSubmitButton] = useState(false);
   const [errors, setErrors] = useState({});
+  const [mailVerified, setMailVerified] = useState(false);
+  const [mailMsg, setMailMsg] = useState("");
   const submit = useSubmit();
 
   function nextBlock() {
-    if (page === 1 && validatePage()) {
-      setPage(2);
-      setBackButton(true);
-    } else if (page === 2 && validatePage()) {
-      setPage(3);
-      setNextButton(false);
-      setSubmitButton(true);
-    }
+    validatePage().then((isValid) => {
+      if (isValid) {
+        if (page === 1) {
+          setPage(2);
+          setBackButton(true);
+        } else if (page === 2) {
+          setPage(3);
+          setNextButton(false);
+          setSubmitButton(true);
+        }
+      } else {
+        console.log("Validation failed, stay on the current page.");
+      }
+    });
   }
 
   function prevBlock() {
@@ -58,11 +68,11 @@ export default function FsignUp() {
     }));
   }
 
-  function validatePage() {
+  async function validatePage() {
     const currentErrors = {};
     const nameRegEx = /^[a-zA-Z]+$/;
     const userNameRegEx = /^[a-zA-Z]+\d{2}$/;
-    const emailRegEx = /^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
+    const emailRegEx = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
     const passwordRegEx = /^[a-zA-Z0-9]{8,}$/;
     const mobileNoRegEx = /^[0-9]{10}$/;
 
@@ -73,12 +83,27 @@ export default function FsignUp() {
       if (!nameRegEx.test(formData.LastName)) {
         currentErrors.LastName = "Enter a valid last name";
       }
+      const today = new Date();
+      const selectedDate = new Date(formData.DOB);
+      if (selectedDate > today) {
+        currentErrors.DOB = "Enter a valid Date";
+      }
     } else if (page === 2) {
       if (!emailRegEx.test(formData.Email)) {
         currentErrors.Email = "Enter a valid email address";
       }
-      if (!mobileNoRegEx.test(formData.MobileNo)) {
-        currentErrors.MobileNo = "Phone Number should be of length 10";
+      if (
+        !mobileNoRegEx.test(formData.MobileNo) ||
+        parseInt(formData.MobileNo) < 6000000000
+      ) {
+        currentErrors.MobileNo = "Enter a valid Mobile Number";
+      }
+      const emailError = await checkRepeatedEmail();
+      if (emailError) {
+        currentErrors.Email = emailError;
+      }
+      if (!currentErrors.Email && !currentErrors.MobileNo) {
+        sendVerificationEmail();
       }
     } else if (page === 3) {
       if (!userNameRegEx.test(formData.UserName)) {
@@ -87,22 +112,134 @@ export default function FsignUp() {
       if (!passwordRegEx.test(formData.Password)) {
         currentErrors.Password = "Password must be at least 8 characters";
       }
+      await checkRepeatedUserName();
+      if (!mailVerified) {
+        currentErrors.OTP = mailMsg;
+      }
     }
 
     setErrors(currentErrors);
     return Object.keys(currentErrors).length === 0;
   }
 
-  const handleSubmit = (event) => {
+  const checkRepeatedEmail = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5500/check-repeated-email",
+        { Email: formData.Email }
+      );
+      if (response.status === 200) {
+        console.log("Email is available.");
+        return null; // No error
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        console.log("Email already exists.");
+        return "Email already exists";
+      } else {
+        console.error("Error Checking Email in Database:", error);
+        return "Error checking email";
+      }
+    }
+  };
+
+  const checkRepeatedUserName = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5500/check-repeated-username",
+        { UserName: formData.UserName }
+      );
+      if (response.status === 200) {
+        console.log("UserName is available.");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          Email: "UserName already exists",
+        }));
+      } else {
+        console.log("Error Checking UserName in Database: ", error);
+      }
+    }
+  };
+
+  const sendVerificationEmail = async () => {
+    try {
+      await axios.post("http://localhost:5500/send-verification-email", {
+        Email: formData.Email,
+      });
+    } catch (error) {
+      setMailMsg("Error sending verification email.");
+      console.error(error);
+    }
+  };
+
+  const validateOTP = async () => {
+    try {
+      console.log(formData.OTP);
+      const response = await axios.post("http://localhost:5500/validate-code", {
+        Email: formData.Email,
+        code: formData.OTP,
+      });
+      if (response.status === 200) {
+        setMailVerified(true);
+        setMailMsg("Verfied Successfully");
+      } else {
+        setMailMsg(response.data.message);
+      }
+    } catch (error) {
+      setMailMsg(error.response?.data?.message || "Error validating code.");
+      console.error(error);
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (validatePage()) {
-      const formDataObj = new FormData();
-      for (const key in formData) {
-        formDataObj.append(key, formData[key]);
+    if (!mailVerified) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        OTP: "Please verify your email before submitting",
+      }));
+      return;
+    }
+
+    const isValid = await validatePage();
+    if (isValid) {
+      // Check if username already exists
+      try {
+        const response = await axios.post(
+          "http://localhost:5500/check-repeated-username",
+          { UserName: formData.UserName }
+        );
+        if (response.status === 200) {
+          console.log("UserName is available.");
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 409) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            UserName: "Username already exists",
+          }));
+          return; // Stop form submission if username exists
+        } else {
+          console.error("Error Checking UserName in Database: ", error);
+          return; // Stop form submission if there's an error in the check
+        }
       }
 
-      submit(formDataObj, { method: "post", action: "/signUp/user" });
+      // Proceed with form submission if username is valid
+      try {
+        const formDataObj = new FormData();
+        for (const key in formData) {
+          formDataObj.append(key, formData[key]);
+        }
+
+        await submit(formDataObj, { method: "post", action: "/signUp/user" });
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
     }
   };
 
@@ -111,7 +248,7 @@ export default function FsignUp() {
       <Header />
       <div className="formBlock">
         <Form className="form signUpForm" method="post" onSubmit={handleSubmit}>
-          <h2 id="step">Page {page}</h2>
+          <h2 id="step">Step {page}</h2>
           <div className="progress-container">
             <div
               className={`progress-bar ${
@@ -136,7 +273,9 @@ export default function FsignUp() {
                   />
                   <img src={firstnameimg} alt="" />
                 </div>
-                {errors?.FirstName && <span>{errors.FirstName}</span>}
+                {errors?.FirstName && (
+                  <span className="red">{errors.FirstName}</span>
+                )}
               </fieldset>
               <fieldset>
                 <div className="input-wrapper">
@@ -149,11 +288,19 @@ export default function FsignUp() {
                   />
                   <img src={lastnameimg} alt="" />
                 </div>
-                {errors?.LastName && <span>{errors.LastName}</span>}
+                {errors?.LastName && (
+                  <span className="red">{errors.LastName}</span>
+                )}
               </fieldset>
               <fieldset>
                 <label>Enter your DOB:</label>
-                <input type="Date" name="DOB" />
+                <input
+                  type="Date"
+                  name="DOB"
+                  value={formData.DOB}
+                  onChange={handleInputChange}
+                />
+                {errors?.DOB && <span className="red">{errors.DOB}</span>}
               </fieldset>
             </div>
           )}
@@ -170,7 +317,9 @@ export default function FsignUp() {
                   />
                   <img src={emailimg} alt="" />
                 </div>
-                {errors && errors.Email && <span>{errors.Email}</span>}
+                {errors && errors.Email && (
+                  <span className="red">{errors.Email}</span>
+                )}
               </fieldset>
               <fieldset>
                 <div className="input-wrapper">
@@ -183,7 +332,9 @@ export default function FsignUp() {
                   />
                   <img src={phoneimg} alt="" />
                 </div>
-                {errors && errors.MobileNo && <span>{errors.MobileNo}</span>}
+                {errors && errors.MobileNo && (
+                  <span className="red">{errors.MobileNo}</span>
+                )}
               </fieldset>
             </div>
           )}
@@ -200,7 +351,9 @@ export default function FsignUp() {
                   />
                   <img src={usernameimg} alt="" />
                 </div>
-                {errors && errors.UserName && <span>{errors.UserName}</span>}
+                {errors && errors.UserName && (
+                  <span className="red">{errors.UserName}</span>
+                )}
               </fieldset>
               <fieldset>
                 <div className="input-wrapper">
@@ -213,7 +366,27 @@ export default function FsignUp() {
                   />
                   <img src={passwordimg} alt="" />
                 </div>
-                {errors?.Password && <span>{errors.Password}</span>}
+                {errors?.Password && (
+                  <span className="red">{errors.Password}</span>
+                )}
+              </fieldset>
+              <fieldset>
+                <div className="input-wrapper">
+                  <input
+                    type="Number"
+                    name="OTP"
+                    placeholder="Enter OTP received in Mail"
+                    value={formData.OTP}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <button onClick={validateOTP} type="button">
+                  Verify
+                </button>
+                {(!errors || !errors.OTP) && (
+                  <span className="green">{mailMsg}</span>
+                )}
+                {errors?.OTP && <span className="red">{errors.OTP}</span>}
               </fieldset>
             </div>
           )}
@@ -229,7 +402,11 @@ export default function FsignUp() {
               </button>
             )}
             {submitButton && (
-              <button className="submitButton" type="submit">
+              <button
+                className="submitButton"
+                type="submit"
+                disabled={!mailVerified}
+              >
                 Submit
               </button>
             )}
@@ -262,10 +439,11 @@ export async function Action({ request }) {
   if (Object.keys(errors).length) {
     return errors;
   }
+  console.log(formData.Email);
   const res = await axios.post("http://localhost:5500/signUp/user", formData);
   if (res.data) {
     return redirect("/login");
   } else {
-    return redirect("/signUp");
+    return redirect("/");
   }
 }

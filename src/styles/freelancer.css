@@ -110,13 +110,17 @@
   padding: 0;
 }
 
-.freelanceDashBoard .fSideBar .top figure img {
+.freelanceDashBoard .fSideBar .top figure figcaption {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   padding: 0;
   background-color: rgb(240, 240, 240);
+  display: flex;
   border: 2px solid black;
+  align-items: center;
+  font-size: 2rem;
+  justify-content: center;
 }
 
 /* <-- sideBar styling */
@@ -267,8 +271,8 @@
 .freelanceDashBoard .freelanceTasks .acceptedRequests .acceptButtons button {
   background-color: turquoise;
   border: none;
-  width: 5rem;
-  height: 2rem;
+  width: 6rem;
+  height: 2.5rem;
   border-radius: 6px;
   margin: 0 2rem;
   display: flex;
@@ -285,7 +289,7 @@
 }
 
 .freelanceDashBoard .freelanceTasks .briefDetails .requestedClients .accept {
-  background-image: linear-gradient(rgb(12, 182, 12) 50%, whitesmoke);
+  background-image: #0f0;
   cursor: pointer;
 }
 

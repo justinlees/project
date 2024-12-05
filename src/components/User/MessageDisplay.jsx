@@ -16,7 +16,7 @@ export default function CmessageDisplay() {
         .then((data) => setAllMessages(data.data));
     };
     setInterval(messageFetch, 300);
-  }, []);
+  }, [params]);
   return (
     <div className="CmessageDisplay">
       {allMessages.allMessages ? (

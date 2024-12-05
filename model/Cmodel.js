@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { finished } = require("nodemailer/lib/xoauth2");
 
 const clientData = new mongoose.Schema({
   FirstName: String,
@@ -8,7 +9,7 @@ const clientData = new mongoose.Schema({
   Password: String,
   MobileNo: Number,
   userType: { type: String, default: "Client" },
-  email: String,
+  Email: String,
   bufferRequests: [
     {
       lancerIds: { type: String, default: null },
@@ -23,6 +24,12 @@ const clientData = new mongoose.Schema({
       taskDescription: { type: String, default: null },
       taskDate: { type: Date, default: null },
       taskAmount: { type: Number, default: 0 },
+    },
+  ],
+  finishedTasks: [
+    {
+      lancerId: { type: String, default: "None" },
+      taskName: { type: String, default: "None" },
     },
   ],
   profilePic: { type: String, default: null },

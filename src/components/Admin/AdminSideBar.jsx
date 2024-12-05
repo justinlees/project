@@ -1,13 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function AsideBar() {
+const handleLogout = () => {
+  // Remove the token from local storage
+  localStorage.removeItem("token");
+
+  // Redirect to the home page
+  window.location.href = "/";
+};
+
+export default function AsideBar({ UserName }) {
   return (
     <nav className="adminSideBar">
       <div className="top">
         <>
-          <img className="adminPic" alt="" />
-          <h1>Username</h1>
+          <h1>{UserName}</h1>
           <hr />
         </>
       </div>
@@ -29,7 +36,7 @@ export default function AsideBar() {
               isActive ? "ActiveNavLink" : "NavLink"
             }
           >
-            Managers
+            Lancers
           </NavLink>
         </li>
         <li>
@@ -65,7 +72,7 @@ export default function AsideBar() {
         </li>
       </ul>
       <div className="bottom">
-        <button>&larr;Collapse</button>
+        <button onClick={handleLogout}>Logout</button>
       </div>
     </nav>
   );

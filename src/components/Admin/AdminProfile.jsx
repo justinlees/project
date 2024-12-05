@@ -13,11 +13,11 @@ export default function AProfile() {
       </div>
       <div className="briefDetails">
         <div className="briefContent">
-          <h2>{adminData.UserName}</h2>
-          <p>FirstName: {adminData.FirstName}</p>
-          <p>LastName: {adminData.LastName}</p>
-          <p>Email: {adminData.email}</p>
-          <p>Mobile: {adminData.MobileNo}</p>
+          <h2>{adminData.admin.UserName}</h2>
+          <p>FirstName: {adminData.admin.FirstName}</p>
+          <p>LastName: {adminData.admin.LastName}</p>
+          <p>Email: {adminData.admin.email}</p>
+          <p>Mobile: {adminData.admin.MobileNo}</p>
         </div>
       </div>
     </div>

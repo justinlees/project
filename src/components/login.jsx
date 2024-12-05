@@ -16,22 +16,26 @@ export default function Login() {
           <fieldset>
             <label>Enter UserName:</label>
             <input type="text" name="UserName" />
-            {errors?.UserName && (
+            {/* {errors?.UserName && (
               <p style={{ color: "red" }}>{errors.UserName}</p>
-            )}
+            )} */}
           </fieldset>
           <fieldset>
             <label>Enter Password:</label>
             <input type="password" name="Password" />
-            {errors?.Password && (
-              <p style={{ color: "red" }}>{errors.Password}</p>
+            {(errors?.UserName || errors?.Password) && (
+              <p style={{ color: "red" }}>Incorrect UserName or Password</p>
             )}
           </fieldset>
           <fieldset className="linking">
             <div className="externalLinking">
               <label childrenlassName="signUpRedirect">
-                Create an Account?
-                <Link to={"/signUp"}>SignUp</Link>
+                Create an Account? 
+                <Link to="/"> SignUp </Link>
+              </label>
+              <label childrenlassName="forgotPassword">
+                Forgot Password? Click 
+                <Link to="/forgotpassword"> here </Link>
               </label>
             </div>
             <div className="loginButton">

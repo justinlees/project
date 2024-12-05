@@ -8,7 +8,7 @@ const adminData = new mongoose.Schema({
   Password: String,
   MobileNo: Number,
   userType: { type: String, default: "Admin" },
-  email: String,
+  Email: String,
   profilePic: String,
   currAmount: { type: Number, default: 0 },
   amountSpent: { type: Number, default: 0 },

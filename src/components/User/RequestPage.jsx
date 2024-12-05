@@ -41,7 +41,7 @@ export default function RequestPage() {
               <li>
                 Email:
                 <br />
-                <b>{item.email}</b>
+                <b>{item.Email}</b>
               </li>
               <li>
                 Mobile:

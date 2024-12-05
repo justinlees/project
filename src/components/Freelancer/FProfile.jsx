@@ -20,7 +20,7 @@ export default function FProfile() {
           <p>FirstName: {freelancerData.FirstName}</p>
           <p>LastName: {freelancerData.LastName}</p>
           <p>Skills: {freelancerData.Skill}</p>
-          <p>Email: {freelancerData.email}</p>
+          <p>Email: {freelancerData.Email}</p>
           <p>Phone Number: {freelancerData.MobileNo}</p>
           <p
             onClick={() => {

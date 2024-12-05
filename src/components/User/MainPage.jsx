@@ -23,6 +23,15 @@ export default function MainPage() {
       )
     : lancers;
 
+  const colors = [
+    "#00BFFF",
+    "#FF7F50",
+    "#32CD32",
+    "#FFD700",
+    "#7851A9",
+    "#00AA00",
+  ];
+
   return (
     <div className="MainPage">
       <div className="searchBar">
@@ -47,46 +56,55 @@ export default function MainPage() {
             filteredData?.map((item) => (
               <div className={anime}>
                 <div className="inner-freelancerData">
-                  <div className="lancerDetails">
-                    <div>
-                      <img alt="" />
+                  <div clssName="lancerDetails">
+                    <div
+                      style={{
+                        width: "80px",
+                        height: "80px",
+                        borderRadius: "50%",
+                        border: "1px solid black",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        backgroundColor:
+                          colors[
+                            Math.min(
+                              Math.floor(
+                                (item.UserName.charAt(0)
+                                  .toUpperCase()
+                                  .charCodeAt(0) -
+                                  65) /
+                                  5
+                              ),
+                              colors.length - 1
+                            )
+                          ],
+                      }}
+                    >
+                      <h2>{item.UserName.charAt(0).toUpperCase()}</h2>
                     </div>
+                    <br />
+                    <br />
                     <div>
-                      <h3>{item.UserName}</h3>
-                      <h3>{item.Rating}</h3>
-                      <h3>{item.Skill}</h3>
+                      <h3>UserName: {item.UserName}</h3>
+                      <br />
+                      <h3>Email: {item.Email}</h3>
+                      <br />
+                      <h3>Mobile: {item.MobileNo}</h3>
+                      <br />
+                      <h3>Skill: {item.Skill}</h3>
+                      <br />
                       <Link to={`${item.UserName}/requestPage`}>
-                        view profile &rarr;
+                        View Profile &rarr;
                       </Link>
                     </div>
                   </div>
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "grey",
-                    width: "4rem",
-                    height: "4rem",
-                    borderRadius: "50%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  onClick={() => {
-                    setAnime("freelancerDataModify");
-                  }}
-                >
-                  &gt;
                 </div>
               </div>
             ))
           ) : (
             <div className="lancerDetails">No details Found</div>
           )}
-          <div className="freelancerData">
-            <div className="lancerDetails">
-              <h3>&rarr;</h3>
-            </div>
-          </div>
         </div>
       </div>
     </div>

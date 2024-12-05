@@ -3,10 +3,8 @@ import { useParams, useOutletContext } from "react-router-dom";
 
 export default function FdashBoard() {
   const params = useParams();
-  const [Count, setCount] = React.useState(0);
   const freelancerData = useOutletContext();
   const filteredData = freelancerData.tasksAssigned[0];
-  const finishedTaskslength = freelancerData.finishedTasks.length;
   const finishedTasks =
     freelancerData.finishedTasks.length > 3
       ? freelancerData.finishedTasks.slice(-3)

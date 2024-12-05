@@ -4,11 +4,7 @@ import { useOutletContext, Link, useParams } from "react-router-dom";
 export default function TaskInfo() {
   const taskInfo = useOutletContext();
   const params = useParams();
-  console.log(taskInfo);
-  const filterTasks = taskInfo.clientId === params.userId;
-  console.log(params.userId)
-  console.log(taskInfo.clientId)
-  console.log(filterTasks)
+  const filterTasks = taskInfo.UserName === params.userId;
 
   return (
     <div className="taskInfo">

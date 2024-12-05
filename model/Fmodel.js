@@ -12,7 +12,7 @@ const freelancerData = new mongoose.Schema({
     type: String,
     default: "Empty",
   },
-  email: String,
+  Email: String,
   profilePic: String,
   Rating: {
     type: Number,
@@ -42,7 +42,7 @@ const freelancerData = new mongoose.Schema({
     {
       clientId: { type: String, default: "None" },
       taskName: { type: String, default: "None" },
-    },
+    }
   ],
 });
 

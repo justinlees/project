@@ -14,15 +14,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: #007bff;
 }
 
-.FsignUpPage .formBlock .sideCover{
-  width:150px;
+.FsignUpPage .formBlock .sideCover {
+  width: 150px;
   background-color: white;
-  color:white;
-  height:100%;
-  display:flex;
+  color: white;
+  height: 100%;
+  display: flex;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
   flex-direction: column;
@@ -30,26 +30,27 @@
   align-items: center;
 }
 
-.FsignUpPage .formBlock .sideCover ul{
-  display:flex;
+.FsignUpPage .formBlock .sideCover ul {
+  display: flex;
   flex-direction: column;
   align-items: center;
   list-style-type: none;
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  height:100%;
+  height: 100%;
 }
 
-.list1{
-  width:150px;
+.list1 {
+  width: 150px;
   border-top-right-radius: 55%;
   justify-content: end;
-  background-color: black;
+  background-color: #007bff;
 }
-.list2{
-  width:150px;
-  background-color: black;
+
+.list2 {
+  width: 150px;
+  background-color: #007bff;
 }
 
 .FsignUpPage .formBlock .signUpForm {
@@ -95,13 +96,13 @@
 .signUpForm .progress-container .progress-bar div {
   width: 2rem;
   height: 2rem;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   background-color: #eee;
-  color:#eee;
-  text-shadow:1px 2px 4px #eee;
+  color: #eee;
+  text-shadow: 1px 2px 4px #eee;
   transform: translateY(-0.7rem);
 }
 
@@ -186,7 +187,7 @@
 }
 
 .FsignUpPage .linking button {
-  width:5rem;
+  width: 5rem;
   color: inherit;
   text-decoration: none;
   background-color: white;
